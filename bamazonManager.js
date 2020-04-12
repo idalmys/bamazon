@@ -97,14 +97,17 @@ function AddInventory(){
         db.query("UPDATE products SET stock_quantity = ? WHERE product_id  = ?",[new_amount,id],(err,res)=>{
             if(err) throw err;
             if(res.affectedRows > 0){
-                console.log("The quantity of the products has been updated!");
-           
-            } 
 
+                console.log("The quantity of the products has been updated!");
+                
+            } 
+            
+            start();
         }) 
 
             }else {
                 console.log("No product Found")}
+                start();
            
         })
     })
