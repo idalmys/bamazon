@@ -44,7 +44,7 @@ function Start(){
                                 else{
                                     var total =(parseInt(res[0].Price) * quantity) ; 
                                     var checkout= (res[0].Quantity - quantity);
-
+                                    
                                     var invoice= "\n.......Invoice.............\n" + 
                                         "\n Producto: "+ res[0].Product + 
                                         "\n Price $: " +res[0].Price + 
