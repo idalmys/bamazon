@@ -3,7 +3,7 @@ Create Database bamazon;
 Use bamazon;
 
 Create table departments(
-department_id INT NOT NUll ,
+department_id INT NOT NUll  ,
 department_name VARCHAR(45) NOT NULL,
 over_head_cost INT NOT NULL,
 PRIMARY KEY (department_id)

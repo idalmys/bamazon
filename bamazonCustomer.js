@@ -33,7 +33,7 @@ function Start(){
                             message: "How many units of the product would you like to buy ?" 
                         }])
                         .then(answers=>{
-                            quantity=answers.quantity;
+                            quantity=parseInt(answers.quantity);
                            
                             db.query("select stock_quantity as Quantity , product_name as Product, price as Price from products  where product_id =? ",[id],(err,res)=>{
                             if(err) throw err;
@@ -42,7 +42,7 @@ function Start(){
                                         Start();
                                 }
                                 else{
-                                    var total =(res[0].Price * quantity); 
+                                    var total =(parseInt(res[0].Price) * quantity) ; 
                                     var checkout= (res[0].Quantity - quantity);
 
                                     var invoice= "\n.......Invoice.............\n" + 
@@ -62,6 +62,7 @@ function Start(){
                                        
                                         } 
 
+
                                         Start();
 
                                     })                          
@@ -76,7 +77,6 @@ function Start(){
                         console.log(" Incorrect ID");
                         Start();
                     }
-                    
 
                 })
 
@@ -88,4 +88,5 @@ function Start(){
 
 }
 Start();
+
 
