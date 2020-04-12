@@ -70,65 +70,46 @@ function ViewInventory(){
    
 }
 function AddInventory(){
-    db.query("select product_id as ID, product_name as Product, price as Price ,stock_quantity as Quantity from products where stock_quantity < 5",(err,res)=>{
-        if(err) throw err;
-        if(res.length > 0){
-            for (var  i = 0; i < res.length; i++) {
-                console.log("ID: " + res[i].ID + " | Product: " + res[i].Product + " | Price: " + res[i].Price + "| Quantity : " +res[0].Quantity);                
-            }
-            inquirer
-            .prompt([
-                {
-                    type: "list",
-                    name: "choice",
-                    message: "Would you like to add more quantity ",
-                    choices : ["Yes","No"]
-        
-                }
-            ])
-            .then(answers=>{
-                if(answers.choice === "Yes"){
-                    inquirer
-                    .prompt([
-                        {
-                            type: "input",
-                            name : "id",
-                            message :"Enter Product ID"
-
-                        },
-                        {
-                            type: "input",
-                            name :"quantity",
-                            message :"Quantity to add : "
-                        }
-                    ])
-                    .then(answers=>{
-                         var q_store= parseInt(res[0].Quantity);
-                         var q_input= parseInt(answers.quantity);
-                         var new_amount = q_input + q_store;
-                         var id=res[0].ID;
-                  
-                        db.query("UPDATE products SET stock_quantity = ? WHERE product_id  = ?",[new_amount,id],(err,res)=>{
-                             if(err) throw err;
-                             if(res.affectedRows > 0){
-                            console.log("Amount added successfully!");
-                            }
-                            start();
-                             })
-                        })
-                    }else{
-                        start();
-                    }
-                
-                })
-           
-            }else{
-                 console.log("Store is full")
-                 start();
-        }
-    })
     
+           
+    inquirer
+    .prompt([
+        {
+             type: "input",
+             name : "id",
+             message :"Enter Product ID"
 
+        },
+        {
+            type: "input",
+            name :"quantity",
+            message :"Quantity to add : "
+        }
+    ])
+    .then(answers=>{
+        var id = answers.id;
+        var qinput= parseInt(answers.quantity);
+        db.query("Select stock_quantity as Quantity from products where product_id=?",[id],(err,res)=>{
+            if(err) throw err;
+            if(res.length > 0){
+                var qstore= res[0].Quantity;
+                var new_amount = qinput + qstore;
+        db.query("UPDATE products SET stock_quantity = ? WHERE product_id  = ?",[new_amount,id],(err,res)=>{
+            if(err) throw err;
+            if(res.affectedRows > 0){
+                console.log("The quantity of the products has been updated!");
+           
+            } 
+
+        }) 
+
+            }else {
+                console.log("No product Found")}
+           
+        })
+    })
+                         
+                        
 }
 function AddProduct() {
    inquirer
