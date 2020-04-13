@@ -32,7 +32,7 @@ function start(){
    })
 
 }
-start();
+
 function ViewProducts(){
     db.query("select product_id as ID, product_name as Product, price as Price ,stock_quantity as Quantity from products",(err,res)=>{
         
@@ -70,14 +70,13 @@ function ViewInventory(){
    
 }
 function AddInventory(){
-    
-           
+               
     inquirer
     .prompt([
         {
              type: "input",
              name : "id",
-             message :"Enter Product ID"
+             message :"Enter Product ID :"
 
         },
         {
@@ -87,27 +86,29 @@ function AddInventory(){
         }
     ])
     .then(answers=>{
-        var id = answers.id;
-        var qinput= parseInt(answers.quantity);
+        
         db.query("Select stock_quantity as Quantity from products where product_id=?",[id],(err,res)=>{
             if(err) throw err;
             if(res.length > 0){
                 var qstore= res[0].Quantity;
+              
+                var id = answers.id;
+                var qinput= parseInt(answers.quantity);
                 var new_amount = qinput + qstore;
-        db.query("UPDATE products SET stock_quantity = ? WHERE product_id  = ?",[new_amount,id],(err,res)=>{
-            if(err) throw err;
-            if(res.affectedRows > 0){
+            db.query("UPDATE products SET stock_quantity = ? WHERE product_id  = ?",[new_amount,id],(err,res)=>{
+                if(err) throw err;
+                if(res.affectedRows > 0){
 
                 console.log("The quantity of the products has been updated!");
                 
-            } 
+                } 
             
-            start();
-        }) 
+              
+            }) 
 
             }else {
-                console.log("No product Found")}
-                start();
+                console.log("No product Found")
+            }
            
         })
     })
@@ -192,3 +193,5 @@ function AddProduct() {
     
     
 }
+
+start();
