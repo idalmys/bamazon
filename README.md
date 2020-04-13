@@ -26,10 +26,16 @@ If a manager selects Add New Product, it should allow the manager to add a compl
 
 # Supervisor
 List a set of menu options:
+
 View Product Sales by Department
 
 Create New Department
+
 If a supervisor selects View Product Sales by Department the app display a summarized table
+
+
 If a  selects Create new department , it should allow to the supervisor to add a complety department
+
+
 # Tecnologies
 node.js, package json, inquiere, mysql ,jquery ,  console.table to print summarized table
