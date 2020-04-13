@@ -35,14 +35,15 @@ function Start(){
                         .then(answers=>{
                             quantity=parseInt(answers.quantity);
                            
-                            db.query("select stock_quantity as Quantity , product_name as Product, price as Price from products  where product_id =? ",[id],(err,res)=>{
+                            db.query("select stock_quantity as Quantity ,product_sale, product_name as Product, price as Price from products  where product_id =? ",[id],(err,res)=>{
                             if(err) throw err;
                                 if(res[0].Quantity < quantity){
                                         console.log("Insuficients Products");
                                         Start();
                                 }
                                 else{
-                                    var total =(parseInt(res[0].Price) * quantity) ; 
+                                    var total =(parseInt(res[0].Price) * quantity) ;
+                                   var product_sale =total + res[0].product_sale;
                                     var checkout= (res[0].Quantity - quantity);
                                     
                                     var invoice= "\n.......Invoice.............\n" + 
@@ -52,9 +53,10 @@ function Start(){
                                         "\n Total: $ " + total +
                                         "\n.......End Invoice.............\n"
                                         console.log(invoice);
+                                      
 
                                     db.query(" UPDATE products SET stock_quantity = ? , product_sale= ?  WHERE product_id  = ?",
-                                        [checkout,total,id],(err,res)=>{       
+                                        [checkout,product_sale,id],(err,res)=>{       
                                         if(err) throw err;
                                        
                                             if(res.affectedRows > 0){

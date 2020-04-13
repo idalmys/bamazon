@@ -100,7 +100,10 @@ function AddInventory(){
                     }
                     start();
                 })
-            }
+            }else {
+                console.log("No product found")
+                start();
+        }
 
         })
         
