@@ -86,112 +86,106 @@ function AddInventory(){
         }
     ])
     .then(answers=>{
-        
-        db.query("Select stock_quantity as Quantity from products where product_id=?",[id],(err,res)=>{
-            if(err) throw err;
+        var id= answers.id;
+        db.query("Select stock_quantity  from products where product_id=?",[id],(err,res)=>{
+            if(err)throw err;
             if(res.length > 0){
-                var qstore= res[0].Quantity;
-              
-                var id = answers.id;
-                var qinput= parseInt(answers.quantity);
-                var new_amount = qinput + qstore;
-            db.query("UPDATE products SET stock_quantity = ? WHERE product_id  = ?",[new_amount,id],(err,res)=>{
-                if(err) throw err;
-                if(res.affectedRows > 0){
-
-                console.log("The quantity of the products has been updated!");
-                
-                } 
-            
-              
-            }) 
-
-            }else {
-                console.log("No product Found")
+                var stock= res[0].stock_quantity;
+                var quantity= parseInt(answers.quantity);
+                var new_amount= (stock+ quantity);
+                db.query("UPDATE products SET stock_quantity = ? WHERE product_id  = ?",[new_amount,id],(err,res)=>{
+                    if(err) throw err;
+                    if(res.affectedRows > 0){
+                        console.log("The quantity of the products has been updated!")
+                    }
+                    start();
+                })
             }
-           
+
         })
+        
+        
     })
                          
                         
 }
 function AddProduct() {
-   inquirer
-   .prompt([
-       
-       {
-        type:"type",
-        name:"product_name",
-        message:"Enter Product Name :"
-
+    inquirer
+    .prompt([
+        
+        {
+         type:"type",
+         name:"product_name",
+         message:"Enter Product Name :"
+ 
+      },
+      {
+         type:"type",
+         name:"price",
+         message:"Enter Product Price :"
+ 
      },
      {
-        type:"type",
-        name:"price",
-        message:"Enter Product Price :"
-
-    },
-    {
-        type:"type",
-        name:"quantity",
-        message:"Enter Product Quantity :"
-
-    }
-    ])
-    .then(answers=>{
-        department=[];
-        pdepartment=answers.department_name;
-        pname =answers.product_name;
-        pprice=answers.price,
-                           
-         pquantity=answers.quantity,
-        db.query("SELECT  department_name FROM bamazon.departments;",(err,res)=>{
-            if(err) throw err;
-
-            for (var i =0; i < res.length; i++) {
-                department.push(res[i].department_name);
-                
-            }
-            inquirer
-                .prompt([{
-                    type: "list",
-                    name:"select_dep",
-                    message :"Select department",
-                    choices : department
-                }])
-                .then(answers=>{
-                  
-                   department_name=answers.select_dep;
-                    db.query("SELECT  department_id  FROM  departments  where  department_name = ?",
-                    [department_name],(err,res)=>{
-                        if(err) throw err;
-                        if(res.length > 0)
-                        {    if(pname == "" || pprice == " " || pquantity ==""){
-                            console.log("Must enter Item Values")
-                            start();
-
-                        }else{
-                            db.query("INSERT INTO products SET product_name= ?, price = ?, stock_quantity = ?, department_id = ?",
-                            [pname,pprice,pquantity,res[0].department_id],(err,res)=>{
-                                if(err) throw err;
-                                if(res.affectedRows > 0){
-                                    console.log("Product inserted successfully!");
-                                    start();
-                                }
-                            })
-
-                        }
+         type:"type",
+         name:"quantity",
+         message:"Enter Product Quantity :"
+ 
+     }
+     ])
+     .then(answers=>{
+         department=[];
+         pdepartment=answers.department_name;
+         pname =answers.product_name;
+         pprice=answers.price,
                             
-
-                        }else{
-                            console.log("Must Enter a Department");
-                        }
-                    })
-                })
-            })
-        })
-    
-    
-}
+          pquantity=answers.quantity,
+         db.query("SELECT  department_name FROM bamazon.departments;",(err,res)=>{
+             if(err) throw err;
+ 
+             for (var i =0; i < res.length; i++) {
+                 department.push(res[i].department_name);
+                 
+             }
+             inquirer
+                 .prompt([{
+                     type: "list",
+                     name:"select_dep",
+                     message :"Select department",
+                     choices : department
+                 }])
+                 .then(answers=>{
+                   
+                    department_name=answers.select_dep;
+                     db.query("SELECT  department_id  FROM  departments  where  department_name = ?",
+                     [department_name],(err,res)=>{
+                         if(err) throw err;
+                         if(res.length > 0)
+                         {    if(pname == "" || pprice == " " || pquantity ==""){
+                             console.log("Must enter Item Values")
+                             start();
+ 
+                         }else{
+                             db.query("INSERT INTO products SET product_name= ?, price = ?, stock_quantity = ?, department_id = ?",
+                             [pname,pprice,pquantity,res[0].department_id],(err,res)=>{
+                                 if(err) throw err;
+                                 if(res.affectedRows > 0){
+                                     console.log("Product inserted successfully!");
+                                     start();
+                                 }
+                             })
+ 
+                         }
+                             
+ 
+                         }else{
+                             console.log("Must Enter a Department");
+                         }
+                     })
+                 })
+             })
+         })
+     
+     
+ }
 
 start();
