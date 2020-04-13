@@ -3,14 +3,14 @@ Create Database bamazon;
 Use bamazon;
 
 Create table departments(
-department_id INT NOT NUll  ,
+department_id INT NOT NUll AUTO_INCREMENT ,
 department_name VARCHAR(45) NOT NULL,
 over_head_cost INT NOT NULL,
 PRIMARY KEY (department_id)
 );
 
 Create table products(
-product_id INT NOT NULL,
+product_id INT NOT NULL AUTO_INCREMENT,
 product_name VARCHAR(60) NOT NULL,
 price INT NOT NULL,
 stock_quantity INT NOT NULL,
