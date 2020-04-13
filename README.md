@@ -34,7 +34,7 @@ Create New Department
 If a supervisor selects View Product Sales by Department the app display a summarized table
 
 
-If a  selects Create new department , it should allow to the supervisor to add a complety department
+If a  supervisor selects Create new department , it should allow to the supervisor to add a complety department
 
 
 # Tecnologies
