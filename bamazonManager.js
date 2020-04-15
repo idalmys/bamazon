@@ -93,16 +93,26 @@ function AddInventory(){
                 var stock= res[0].stock_quantity;
                 var quantity= parseInt(answers.quantity);
                 var new_amount= (stock+ quantity);
-                db.query("UPDATE products SET stock_quantity = ? WHERE product_id  = ?",[new_amount,id],(err,res)=>{
-                    if(err) throw err;
-                    if(res.affectedRows > 0){
-                        console.log("The quantity of the products has been updated!")
-                    }
-                    start();
-                })
+                if(quantity > 0){
+                    db.query("UPDATE products SET stock_quantity = ? WHERE product_id  = ?",[new_amount,id],(err,res)=>{
+                        if(err) throw err;
+                        if(res.affectedRows > 0){
+                            console.log("The quantity of the products has been updated!")
+                        }
+                        start();
+                    })
+                    
+                }else{
+                    console.log("Enter Data");
+                    AddInventory();
+                  
+                   
+                }
+                
             }else {
                 console.log("No product found")
-                start();
+                AddInventory();
+              
         }
 
         })
@@ -110,7 +120,7 @@ function AddInventory(){
         
     })
                          
-                        
+                      
 }
 function AddProduct() {
     inquirer
@@ -144,7 +154,7 @@ function AddProduct() {
           pquantity=answers.quantity,
          db.query("SELECT  department_name FROM bamazon.departments;",(err,res)=>{
              if(err) throw err;
- 
+            
              for (var i =0; i < res.length; i++) {
                  department.push(res[i].department_name);
                  
@@ -165,7 +175,7 @@ function AddProduct() {
                          if(res.length > 0)
                          {    if(pname == "" || pprice == " " || pquantity ==""){
                              console.log("Must enter Item Values")
-                             start();
+                             AddProduct();
  
                          }else{
                              db.query("INSERT INTO products SET product_name= ?, price = ?, stock_quantity = ?, department_id = ?",
@@ -186,7 +196,7 @@ function AddProduct() {
                      })
                  })
              })
-         })
+        })
      
      
  }
