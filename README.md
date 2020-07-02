@@ -38,7 +38,7 @@ If a manager selects Add New Product, it should allow the manager to add a compl
 
 # Supervisor
 
-![supervisor ](bamazon/Supervisor Images App/new_department_added.png
+![supervisor ](/Supervisor Images App/new_department_added.png)
 )
 
 
