@@ -1,13 +1,13 @@
+bamazon ](view_products.png)
+
+
 # Bamazon
 It is an app that display an existing product listing. The app will take in orders from customers and deplete stock from the store's inventory.The app request data to the database BAMAZON that include 2 tables (products and departments) with a relation betwen tables from one to many.That means department contains many products but the products belong to one department.The app Include 3 modules(Customer ,Manager, Supervisor):
 
 # Customer
 Can select the product you are buying, in case you enter an incorrect id the system shows you an error (Incorrect ID) and generate again the list of existing products. Once you select a product allows you to enter the amount to buy, if we have that amount an invoice is generated and the quantity for that product is updated (You order has been placed sucessfully). Otherwise, the system will show an error (Insuficients products).
 
-![picture search a city weather data ](/Customer Images App/order_placed.png)
 
-
-![customer ](order_placed.png)
 
 # Manager
 List a set of menu options:
@@ -28,21 +28,11 @@ If a manager selects Add to Inventory, your app should display a prompt that wil
 
 If a manager selects Add New Product, it should allow the manager to add a completely new product to a selected department to the store.
 
-![customer ](view_products.png)
 
-
-![customer ](new_product_low_inventory.png)
-
-
-![customer ](add_inventory_method_updated.png)
 
 # Supervisor
 
-![supervisor ](Supervisor Images App/new_department_added.png)
 
-
-
-![supervisor ](Supervisor Images App/table_products_by_department.png)
 
 
 
