@@ -38,11 +38,11 @@ If a manager selects Add New Product, it should allow the manager to add a compl
 
 # Supervisor
 
-![supervisor ](/Supervisor Images App/new_department_added.png)
+![supervisor ](Supervisor Images App/new_department_added.png)
 
 
 
-![supervisor ](/Supervisor Images App/table_products_by_department.png)
+![supervisor ](Supervisor Images App/table_products_by_department.png)
 
 
 
