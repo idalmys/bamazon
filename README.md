@@ -1,4 +1,4 @@
-[bamazon ](view_products.png)
+![bamazon ](view_products.png)
 
 
 # Bamazon
