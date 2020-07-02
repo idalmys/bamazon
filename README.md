@@ -3,6 +3,12 @@ It is an app that display an existing product listing. The app will take in orde
 
 # Customer
 Can select the product you are buying, in case you enter an incorrect id the system shows you an error (Incorrect ID) and generate again the list of existing products. Once you select a product allows you to enter the amount to buy, if we have that amount an invoice is generated and the quantity for that product is updated (You order has been placed sucessfully). Otherwise, the system will show an error (Insuficients products).
+
+![customer ](incorrect_Id.png)
+
+
+![customer ](order_placed.png)
+
 # Manager
 List a set of menu options:
 
@@ -22,9 +28,23 @@ If a manager selects Add to Inventory, your app should display a prompt that wil
 
 If a manager selects Add New Product, it should allow the manager to add a completely new product to a selected department to the store.
 
+![customer ](view_products.png)
 
+
+![customer ](new_product_low_inventory.png)
+
+
+![customer ](add_inventory_method_updated.png)
 
 # Supervisor
+
+![supervisor ](new_department_added.png)
+
+
+![supervisor ](table_products_by_department.png)
+
+
+
 List a set of menu options:
 
 View Product Sales by Department
